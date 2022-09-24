@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#set -o errexit
+#set -o nounset
+
+
+#watchgod celery.__main__.main --args -A easy_lottery.config.celery_app worker -l INFO
+nohup watchgod celery.__main__.main --args -A easy_lottery.config.celery_app worker -n django_example_worker -l INFO >celery_worker.out 2>&1 &
