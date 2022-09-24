@@ -8,7 +8,7 @@ from .base import *
 
 SECRET_KEY = 'django-insecure-h5^2mae#oec%^psk=d4=(pxn34v-*kfq7r84+%fq=3+pys5(&p'
 
-WSGI_APPLICATION = 'easy_lottery.config.wsgi.local.application'
+# WSGI_APPLICATION = 'easy_lottery.config.wsgi.local.application'
 
 DATABASES = {
     'default': {
