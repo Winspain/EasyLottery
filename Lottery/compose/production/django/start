@@ -7,4 +7,4 @@ export prometheus_multiproc_dir=logs/prometheus_multiproc
 #bash compose/local/django/celery/worker/start
 #bash compose/local/django/celery/beat/start
 #bash compose/local/django/celery/flower/start
-nohup gunicorn easy_lottery.config.wsgi.production -c /app/Lottery/easy_lottery/config/gunicorn/production.py >> /app/Lottery/compose/production/django/nohup.out 2>&1 &
+nohup gunicorn easy_lottery.config.wsgi.production -c /app/Lottery/easy_lottery/config/gunicorn/production.py >> /app/Lottery/logs/nohup.out 2>&1 &
