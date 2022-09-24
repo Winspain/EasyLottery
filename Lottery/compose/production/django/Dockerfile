@@ -4,4 +4,4 @@ RUN mkdir app
 COPY . app
 RUN pip install -r app/Lottery/requirements/base.txt
 CMD sh /app/Lottery/compose/production/django/start && tail -f -n 100 /app/Lottery/logs/nohup.out
-WORKDIR /root/app/Lottery
+WORKDIR /app/Lottery
