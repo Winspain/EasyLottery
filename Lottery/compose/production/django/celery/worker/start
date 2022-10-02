@@ -1,7 +1,7 @@
 #!/bin/bash
 
-set -o errexit
-set -o nounset
+#set -o errexit
+#set -o nounset
 
 
-watchgod celery.__main__.main --args -A config.celery_app worker -l INFO
+nohup watchgod celery.__main__.main --args -A easy_lottery.config.celery.production worker -l INFO >celery_worker.out 2>&1 &
