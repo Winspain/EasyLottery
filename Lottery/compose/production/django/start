@@ -4,7 +4,7 @@ export prometheus_multiproc_dir=logs/prometheus_multiproc
 #python3 -m pip install -r requirements/base.txt
 #python /app/Lottery/manage.py migrate --settings=easy_lottery.settings.production
 #ps -ef | grep 'beat\|worker\|multiprocessing-fork\|flower' | grep -v grep | awk '{print "kill -9 "$2}'|sh
-#bash compose/local/django/celery/worker/start
-#bash compose/local/django/celery/beat/start
-#bash compose/local/django/celery/flower/start
+bash compose/production/django/celery/worker/start
+bash compose/production/django/celery/beat/start
+bash compose/production/django/celery/flower/start
 nohup gunicorn easy_lottery.config.wsgi.production -c easy_lottery/config/gunicorn/production.py >> logs/nohup.out 2>&1 &
