@@ -4,9 +4,9 @@
 # @File     tasks.py
 # @Software PyCharm
 
-from easy_lottery.config.celery.production import app
+from celery import shared_task
 
 
-@app.shared_task
+@shared_task
 def add(x, y):
     return x + y
