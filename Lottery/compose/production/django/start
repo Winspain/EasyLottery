@@ -4,6 +4,8 @@
 #python3 -m pip install -r requirements/base.txt
 #python /app/Lottery/manage.py migrate --settings=easy_lottery.settings.production
 #ps -ef | grep 'beat\|worker\|multiprocessing-fork\|flower' | grep -v grep | awk '{print "kill -9 "$2}'|sh
+
+# 调整主程序启动顺序在最上面,因dockerfile会读取nohup文件,celery等脚本运行较慢,因此会报错nohup文件找不到
 nohup gunicorn easy_lottery.config.wsgi.production -c easy_lottery/config/gunicorn/production.py >> logs/nohup.out 2>&1 &
 bash compose/production/django/celery/worker/start
 bash compose/production/django/celery/beat/start
