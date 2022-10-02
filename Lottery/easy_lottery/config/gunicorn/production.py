@@ -7,7 +7,7 @@
 import multiprocessing
 from pathlib import Path
 
-from prometheus_client import multiprocess
+# from prometheus_client import multiprocess
 
 BASE_DIR = str(Path(__file__).resolve().parent.parent.parent.parent)
 bind = '0.0.0.0:8888'  # 绑定ip和端口号
