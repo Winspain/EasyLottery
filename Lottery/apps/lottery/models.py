@@ -13,10 +13,9 @@ class LotteryInfo(models.Model):
     backNum1 = models.IntegerField()
     backNum2 = models.IntegerField()
     drawTime = models.DateField(verbose_name='开奖日期')
-    drawState = models.CharField(max_length=100)
-    isDeleted = models.BooleanField()
-    createdBy = models.CharField(max_length=100)
-    updateBy = models.CharField(max_length=100)
+    isDeleted = models.BooleanField(default=0)
+    createdBy = models.CharField(null=True, max_length=100)
+    updateBy = models.CharField(null=True, max_length=100)
     createdTime = models.DateTimeField(auto_now_add=True)
     updateTime = models.DateTimeField(null=True)
 

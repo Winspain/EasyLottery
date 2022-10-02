@@ -6,10 +6,16 @@
 
 from rest_framework import serializers
 
-from lottery.models import LotterySelectInfo
+from lottery.models import LotterySelectInfo, LotteryInfo
 
 
 class LotterySerializer(serializers.ModelSerializer):
     class Meta:
         model = LotterySelectInfo
+        fields = '__all__'
+
+
+class Lottery500Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = LotteryInfo
         fields = '__all__'

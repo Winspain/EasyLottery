@@ -26,5 +26,9 @@ class ApiRestResponse:
 
 @unique
 class ResponseEnum(Enum):
-    SUCCESS = {'error_code': '000000', 'message': 'SUCCESS'}
-    EXAMPLE_ENUM = {'error_code': '000001', 'message': 'ok'}
+    """
+    00 微服务 00 模块 00 编号
+    """
+    SUCCESS = {'error_code': '010000', 'message': 'SUCCESS'}
+    EXAMPLE_ENUM = {'error_code': '010001', 'message': 'ok'}
+    FAIL_SPIDER_500 = {'error_code': '010101', 'message': '500网抓取失败'}
