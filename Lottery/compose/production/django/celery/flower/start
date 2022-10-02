@@ -4,4 +4,4 @@
 #set -o nounset
 
 
-nohup celery --app=easy_lottery.config.celery.production --broker="${REDIS_URL}" flower --address=0.0.0.0 --port="${FLOWER_PORT}" >celery_flower.out 2>&1 &
+nohup celery --app=easy_lottery.config.celery.production --broker="${REDIS_URL}" flower --address=0.0.0.0 --port="${FLOWER_PORT}" --basic_auth="${CELERY_FLOWER_USER}:${CELERY_FLOWER_PWD}" >celery_flower.out 2>&1 &
