@@ -12,7 +12,6 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 from common.api_rest_response import ApiRestResponse, ResponseEnum
-from lottery.celery_tasks import tasks
 from lottery.models import LotteryInfo
 from lottery.serializers.lottery_serializer import Lottery500Serializer
 from lottery.service.get_lottery import get_latest_number
@@ -38,7 +37,6 @@ class Lottery500View(generics.ListCreateAPIView, viewsets.GenericViewSet):
         :return:
         :rtype:
         """
-        res = tasks.add.delay(1, 3)
         latest_number = get_latest_number()
         if not latest_number:
             return Response(data=ApiRestResponse().response(enum=ResponseEnum.FAIL_SPIDER_500))
