@@ -116,5 +116,5 @@ class MyLotteryCompareView(generics.ListAPIView, viewsets.GenericViewSet):
                 'text': push_text  # 去除引号
             }
         })
-        t = requests.post(hook_url, data=payload, headers=headers)
+        notice_dingding = requests.post(hook_url, data=payload, headers=headers)
         return Response(data=ApiRestResponse().response(enum=ResponseEnum.SUCCESS, content=draw_result_list))
