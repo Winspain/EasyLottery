@@ -31,10 +31,10 @@ class LotterySelectInfo(models.Model):
     frontNum5 = models.IntegerField()
     backNum1 = models.IntegerField()
     backNum2 = models.IntegerField()
-    selectState = models.CharField(max_length=100)
+    selectState = models.CharField(null=True, max_length=100)
     isDeleted = models.BooleanField()
-    createdBy = models.CharField(max_length=100)
-    updateBy = models.CharField(max_length=100)
+    createdBy = models.CharField(null=True, max_length=100)
+    updateBy = models.CharField(null=True, max_length=100)
     createdTime = models.DateTimeField(auto_now_add=True)
     updateTime = models.DateTimeField(null=True)
 
