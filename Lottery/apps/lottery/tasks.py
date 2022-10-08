@@ -6,9 +6,12 @@
 
 from __future__ import absolute_import, unicode_literals
 
+import requests
 from celery import shared_task
 
 
 @shared_task
-def add():
-    return 3
+def crawl_by_500():
+    url = 'http://127.0.0.1/easyLottery/v1/lottery/craw'
+    response_data = requests.post(url)
+    return response_data
