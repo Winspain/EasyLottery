@@ -4,15 +4,31 @@
 # @File     production.py
 # @Software PyCharm
 
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
 from .base import *
 from easy_lottery.config.celery.production import app as celery_app
 
 DEBUG = False
 
-__all__ = ('celery_app')
+sentry_sdk.init(
+    dsn=os.environ['SENTRY_DSN'],
+    integrations=[
+        DjangoIntegration(),
+    ],
+
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+    traces_sample_rate=1.0,
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -28,6 +44,7 @@ DATABASES = {
 # Celery
 # ------------------------------------------------------------------------------
 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-broker_url
+__all__ = ('celery_app')
 CELERY_BROKER_URL = os.environ['REDIS_URL']
 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-result_backend
 # CELERY_RESULT_BACKEND = CELERY_BROKER_URL
