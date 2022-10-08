@@ -5,9 +5,11 @@
 # @Software PyCharm
 
 from .base import *
+from easy_lottery.config.celery.production import app as celery_app
 
 DEBUG = False
 
+__all__ = ('celery_app')
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
