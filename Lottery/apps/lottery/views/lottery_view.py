@@ -16,6 +16,7 @@ from common.api_rest_response import ApiRestResponse, ResponseEnum
 from lottery.models import LotterySelectInfo, LotteryInfo, LotteryWebhookInfo
 from lottery.serializers.lottery_serializer import LotterySelectSerializer
 from lottery.service.lottery_rules import lottery_compare, lottery_rule
+from lottery.service.permission import CeleryPermission
 
 
 class MyLotteryView(generics.ListCreateAPIView, viewsets.GenericViewSet):
@@ -70,6 +71,7 @@ class MyLotteryCompareView(generics.ListAPIView, viewsets.GenericViewSet):
     lottery_queryset = LotteryInfo.objects.exclude(isDeleted=True)
     select_queryset = LotterySelectInfo.objects.exclude(isDeleted=True)
     webhook_queryset = LotteryWebhookInfo.objects.exclude(isDeleted=True)
+    permission_classes = [CeleryPermission]
 
     def list(self, request: Request, *args: Any, **kwargs: Any) -> object:
         """
