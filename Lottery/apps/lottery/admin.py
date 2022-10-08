@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from lottery.models import LotterySelectInfo, LotteryInfo
+from lottery.models import LotterySelectInfo, LotteryInfo, LotteryWebhookInfo
 
 
 class LotterySelectAdmin(admin.ModelAdmin):
@@ -12,5 +12,10 @@ class LotteryInfoAdmin(admin.ModelAdmin):
     list_display = ['id', 'drawNum', 'frontNum1', 'frontNum2', 'frontNum3', 'frontNum4', 'frontNum5', 'backNum1', 'backNum2', 'drawTime', 'createdTime']
 
 
+class LotteryWebhookAdmin(admin.ModelAdmin):
+    list_display = ['id', 'hookUrl', 'isDeleted', 'createdTime']
+
+
 admin.site.register(LotteryInfo, LotteryInfoAdmin)
 admin.site.register(LotterySelectInfo, LotterySelectAdmin)
+admin.site.register(LotteryWebhookInfo, LotteryWebhookAdmin)
