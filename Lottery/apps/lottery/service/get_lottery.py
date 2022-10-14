@@ -8,7 +8,7 @@ import bs4
 import requests
 
 
-def get_latest_number():
+def get_latest_number_by_500():
     url_500 = 'http://datachart.500.com/dlt/history/history.shtml'
     response_500 = requests.get(url_500)
     if not response_500.status_code == 200:

@@ -9,7 +9,7 @@ from rest_framework import serializers
 from lottery.models import LotterySelectInfo, LotteryInfo
 
 
-class LotterySerializer(serializers.ModelSerializer):
+class LotterySelectSerializer(serializers.ModelSerializer):
     class Meta:
         model = LotterySelectInfo
         fields = '__all__'
