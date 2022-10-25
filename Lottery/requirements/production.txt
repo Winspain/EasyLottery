@@ -1,0 +1,15 @@
+Django==3.2.4
+djangorestframework
+PyMySQL
+requests
+uvicorn
+celery
+django-celery-beat
+django-filter
+redis
+watchgod
+django-celery-results
+flower
+gunicorn
+beautifulsoup4
+sentry-sdk
