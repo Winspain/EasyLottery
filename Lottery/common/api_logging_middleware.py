@@ -27,7 +27,6 @@ class ApiLoggingMiddleware:
             body = 'body内容为文件'
 
         post = str(request.POST)
-
         response = self.get_response(request)
         execute_time = round((time.time() - request.start_time) * 1000)
 
@@ -42,21 +41,23 @@ class ApiLoggingMiddleware:
             'path': request.path,
             'status_code': response.status_code,
             'response_time': execute_time,
-            'response_body': response_data
-
+            'response_body': response_data,
         }
 
-        if request.path in EXCLUDE_PATH:
-            self.api_logger.info(f'{request.user} {execute_time}ms {request.method} {request.path} {body} {post} {response.status_code} {response.reason_phrase}', extra=extra)
+        exclude_path = [True if request.path.startswith(_) else False for _ in EXCLUDE_PATH]
+        if True in exclude_path:
+            pass
 
         elif request.method != 'GET':
             self.api_logger.info(f'{request.user} {execute_time}ms {request.method} {request.path} {body} {post} {response.status_code} {response.reason_phrase} {response_data}', extra=extra)
 
         else:
             self.api_logger.info(f'{request.user} {execute_time}ms {request.method} {request.path} {response.status_code} {response.reason_phrase}', extra=extra)
+
         return response
 
 
 EXCLUDE_PATH = [
     '/metrics',
+    '/static/admin',
 ]
