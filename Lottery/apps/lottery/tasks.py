@@ -42,7 +42,8 @@ def crawl_notice_task():
     while True:
         latest_number = get_latest_number_by_500()
         draw_num = latest_number['drawNum']
-        if not lottery_queryset.filter(drawNum=draw_num).exists():
+        # if not lottery_queryset.filter(drawNum=draw_num).exists():
+        if lottery_queryset.filter(drawNum=draw_num).exists():  # debug暂时使用
             break
         if time.time() - begin_time > 3600 * 4:
             return '运行超过4小时,自动停止'
