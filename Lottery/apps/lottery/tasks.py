@@ -46,9 +46,9 @@ def crawl_notice_task():
             break
         if time.time() - begin_time > 3600 * 4:
             return '运行超过4小时,自动停止'
-        serializer = Lottery500Serializer(data=latest_number)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+        # serializer = Lottery500Serializer(data=latest_number)
+        # serializer.is_valid(raise_exception=True)
+        # serializer.save()
 
         draw_info = lottery_queryset.latest('drawTime')
         draw_num = draw_info.drawNum
