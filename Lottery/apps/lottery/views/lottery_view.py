@@ -61,7 +61,10 @@ class MyLotteryView(generics.ListCreateAPIView, viewsets.GenericViewSet):
         :return:
         :rtype:
         """
-        serializer = self.get_serializer(data=request.data)
+        user_id = request.user.id
+        request_data = request.data
+        request_data['createdBy'] = user_id
+        serializer = self.get_serializer(data=request_data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(data=ApiRestResponse().response(enum=ResponseEnum.SUCCESS))
