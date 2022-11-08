@@ -42,14 +42,15 @@ def crawl_notice_task():
     while True:
         latest_number = get_latest_number_by_500()
         draw_num = latest_number['drawNum']
-        # if not lottery_queryset.filter(drawNum=draw_num).exists():
-        if lottery_queryset.filter(drawNum=draw_num).exists():  # debug暂时使用
+        if not lottery_queryset.filter(drawNum=draw_num).exists():
             break
         if time.time() - begin_time > 3600 * 4:
             return '运行超过4小时,自动停止'
-        # serializer = Lottery500Serializer(data=latest_number)
-        # serializer.is_valid(raise_exception=True)
-        # serializer.save()
+
+        serializer = Lottery500Serializer(data=latest_number)
+        if not serializer.is_valid():
+            return serializer.errors
+        serializer.save()
 
     draw_info = lottery_queryset.latest('drawTime')
     draw_num = draw_info.drawNum
@@ -83,7 +84,3 @@ def crawl_notice_task():
         }
     })
     notice_dingding = requests.post(hook_url, data=payload, headers=headers)
-
-
-def test():
-    return 'test'

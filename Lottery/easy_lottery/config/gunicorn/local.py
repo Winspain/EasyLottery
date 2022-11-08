@@ -7,10 +7,10 @@
 import multiprocessing
 from pathlib import Path
 
-from prometheus_client import multiprocess
+# from prometheus_client import multiprocess
 
 BASE_DIR = str(Path(__file__).resolve().parent.parent.parent.parent)
-bind = '127.0.0.1:8000'  # 绑定ip和端口号
+bind = '127.0.0.1:5555'  # 绑定ip和端口号
 backlog = 512  # 监听队列
 chdir = BASE_DIR  # gunicorn要切换到的目的工作目录
 timeout = 30  # 超时
@@ -22,6 +22,6 @@ loglevel = 'info'  # 日志级别，这个日志级别指的是错误日志的�
 access_log_format = '%(t)s %(p)s %(h)s "%(r)s" %(s)s %(L)s %(b)s %(f)s" "%(a)s"'  # 设置gunicorn访问日志格式，错误日志无法设置
 
 
-def child_exit(server, worker):
-    """针对多进程使用prometheus进行适配"""
-    multiprocess.mark_process_dead(worker.pid)
+# def child_exit(server, worker):
+#     """针对多进程使用prometheus进行适配"""
+#     multiprocess.mark_process_dead(worker.pid)

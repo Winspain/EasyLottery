@@ -9,4 +9,4 @@
 #    --broker="${CELERY_BROKER_URL}" \
 #    --basic_auth="${CELERY_FLOWER_USER}:${CELERY_FLOWER_PASSWORD}"
 #nohup celery --app=easy_lottery.config.celery_app --broker=redis://:atec%40123@47.96.117.252:6379/0 flower --address=0.0.0.0 --port=5555 >celery_flower.out 2>&1 &
-nohup celery --app=easy_lottery.config.celery_app flower --address=0.0.0.0 --port=5555 >celery_flower.out 2>&1 &
+nohup celery --app=easy_lottery.config.celery.local flower --address=0.0.0.0 --port=5556 >celery_flower.out 2>&1 &

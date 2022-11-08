@@ -1,10 +1,9 @@
 #!/bin/bash
 
-export prometheus_multiproc_dir=logs/prometheus_multiproc
-python3 -m pip install -r requirements/base.txt
-nohup gunicorn easy_lottery.config.wsgi.develop -c easy_lottery/config/gunicorn/local.py 2>&1 &
-#python manage.py migrate --settings=easy_lottery.settings.local
-#ps -ef | grep 'beat\|worker\|multiprocessing-fork\|flower' | grep -v grep | awk '{print "kill -9 "$2}'|sh
+#export prometheus_multiproc_dir=logs/prometheus_multiproc
+#python3 -m pip install -r requirements/base.txt
+ps -ef | grep 'beat\|worker\|multiprocessing-fork\|flower' | grep -v grep | awk '{print "kill -9 "$2}'|sh
+nohup gunicorn easy_lottery.config.wsgi.local -c easy_lottery/config/gunicorn/local.py 2>&1 &
 bash compose/local/django/celery/worker/start
 bash compose/local/django/celery/beat/start
-bash compose/local/django/celery/flower/start
+#bash compose/local/django/celery/flower/start
