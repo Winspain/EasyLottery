@@ -5,7 +5,6 @@
 # @Software PyCharm
 
 from __future__ import absolute_import, unicode_literals
-
 import json
 import time
 
@@ -47,10 +46,10 @@ def crawl_notice_task():
         if time.time() - begin_time > 3600 * 4:
             return '运行超过4小时,自动停止'
 
-        serializer = Lottery500Serializer(data=latest_number)
-        if not serializer.is_valid():
-            return serializer.errors
-        serializer.save()
+    serializer = Lottery500Serializer(data=latest_number)
+    if not serializer.is_valid():
+        return serializer.errors
+    serializer.save()
 
     draw_info = lottery_queryset.latest('drawTime')
     draw_num = draw_info.drawNum
