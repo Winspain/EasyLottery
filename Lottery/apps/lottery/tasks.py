@@ -11,6 +11,7 @@ import requests
 from celery import shared_task
 from rest_framework.authtoken.admin import User
 
+from common.constant.log_const import DJANGO_LOGGER
 from lottery.models import LotteryInfo, LotterySelectInfo
 from lottery.serializers.lottery_serializer import Lottery500Serializer
 from lottery.service.get_lottery import get_latest_number_by_500, notice_user_by_dingding
@@ -39,6 +40,8 @@ def crawl_notice_task():
     user_id_list = list(user_queryset)
 
     while True:
+        time.sleep(10)
+        DJANGO_LOGGER.warning('正在获取最新一期号码')
         latest_number = get_latest_number_by_500()
         draw_num = latest_number['drawNum']
         if not lottery_queryset.filter(drawNum=draw_num).exists():
