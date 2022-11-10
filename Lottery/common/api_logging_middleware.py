@@ -60,4 +60,5 @@ class ApiLoggingMiddleware:
 EXCLUDE_PATH = [
     '/metrics',
     '/static/admin',
+    '/admin',
 ]
