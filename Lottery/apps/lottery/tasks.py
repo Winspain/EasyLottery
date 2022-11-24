@@ -19,19 +19,6 @@ from lottery.service.lottery_rules import lottery_compare, lottery_rule
 
 
 @shared_task
-def crawl_by_500():
-    url = 'http://127.0.0.1:8888/easyLottery/v1/lottery/craw'
-    response_data = requests.post(url).json()
-    return response_data
-
-
-@shared_task
-def notice_dingding():
-    url = 'http://127.0.0.1:8888/easyLottery/v1/lottery/compare'
-    response_data = requests.get(url).json()
-
-
-@shared_task
 def crawl_notice_task():
     begin_time = time.time()
     lottery_queryset = LotteryInfo.objects.exclude(isDeleted=True)
@@ -40,7 +27,7 @@ def crawl_notice_task():
     user_id_list = list(user_queryset)
 
     while True:
-        time.sleep(10)
+        time.sleep(20)
         DJANGO_LOGGER.warning('正在获取最新一期号码')
         latest_number = get_latest_number_by_500()
         draw_num = latest_number['drawNum']
