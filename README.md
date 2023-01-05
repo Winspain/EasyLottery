@@ -16,7 +16,7 @@
 ## Install
 
 ```
-TODO:待更新
+docker pull winspain0/easy_lottery:latest
 ```
 
 ## Usage
