@@ -8,7 +8,7 @@ COPY . /app
 WORKDIR /app/lotteryGo
 
 # 编译 Go 应用
-RUN go build -o lotteryGo/main .
+RUN go build -o main .
 
 # 启动应用
 CMD ["./main"]
