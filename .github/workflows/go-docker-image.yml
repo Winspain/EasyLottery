@@ -41,7 +41,7 @@ jobs:
         platforms: linux/amd64
         push: ${{ github.event_name != 'pull_request' }}
         tags: |
-          winspain0/easy_lottery:${{ github.ref_name }}
+          winspain0/easy_lottery:v2.0.0
           winspain0/easy_lottery:latest
 
           
