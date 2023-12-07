@@ -6,9 +6,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
+	"github.com/robfig/cron/v3"
 	"net/http"
 	"os"
 	"strings"
+	"time"
 )
 
 var prizeMap = map[string][]int{
@@ -217,7 +219,7 @@ func sendDingDingNotification(hookUrl string, drawPeriod, drawTime string, hitPr
 	return nil
 }
 
-func main() {
+func run() {
 	latestNum, err := getLatestNumberBy500()
 	if err != nil {
 		fmt.Println("Error:", err)
@@ -248,5 +250,28 @@ func main() {
 	err1 := sendDingDingNotification(hookUrl, drawPeriod, drawTime, hitPrizeArray, drawNum, userSelectString)
 	if err1 != nil {
 		fmt.Println("Error:", err1)
+	}
+}
+
+func main() {
+	// 创建一个cron调度器
+	c := cron.New()
+
+	// 添加定时任务
+	_, err := c.AddFunc("0 */1 20-23 * 1,3,6", run)
+	if err != nil {
+		fmt.Println("添加定时任务失败：", err)
+		return
+	}
+
+	// 启动定时任务
+	c.Start()
+
+	// 运行一段时间，让定时任务执行
+	// 这里可以根据你的实际需求设置运行时间
+	// 这里只是一个示例，你可能需要让程序一直运行或者使用其他方法来阻止程序退出
+	for {
+		run()
+		time.Sleep(1 * time.Minute)
 	}
 }
