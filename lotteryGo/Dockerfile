@@ -5,11 +5,10 @@ FROM golang:latest
 COPY . /app
 
 # 设置工作目录
-WORKDIR /app
-RUN ls -l
+WORKDIR /app/lotteryGo
 
 # 编译 Go 应用
-RUN go build -o main .
+RUN go build -o lotteryGo/main .
 
 # 启动应用
 CMD ["./main"]
