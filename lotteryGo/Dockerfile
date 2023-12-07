@@ -6,6 +6,7 @@ COPY . /app
 
 # 设置工作目录
 WORKDIR /app
+RUN ls -l
 
 # 编译 Go 应用
 RUN go build -o main .
