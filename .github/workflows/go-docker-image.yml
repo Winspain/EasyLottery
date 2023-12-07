@@ -1,0 +1,47 @@
+name: Docker Image CI
+
+on:
+  push:
+    tags:
+      - v*
+
+# Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test tags'
+
+jobs:
+  buildx:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Get current date
+      id: getTime
+      run: echo "nowtime=$(TZ=Asia/Shanghai date +'%Y%m%d%H%M')" >> $GITHUB_OUTPUT
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PWD }}
+
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: LotteryGo/Dockerfile
+        platforms: linux/amd64
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: |
+          winspain0/easy_lottery:${{ github.ref_name }}
+          winspain0/easy_lottery:latest
+
+          
