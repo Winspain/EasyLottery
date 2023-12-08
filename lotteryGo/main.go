@@ -9,8 +9,14 @@ import (
 	"github.com/robfig/cron/v3"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
-	"time"
+	"sync"
+)
+
+var (
+	lastRunResult int
+	resultMutex   sync.Mutex
 )
 
 var prizeMap = map[string][]int{
@@ -237,9 +243,30 @@ func run() {
 		latestNum["backNum1"],
 		latestNum["backNum2"],
 	)
+
+	result, err := strconv.Atoi(drawPeriod)
+	if err != nil {
+		fmt.Println("转换为整数失败：", err)
+		return
+	}
+
+	// 对比返回值和全局变量
+	resultMutex.Lock()
+	defer resultMutex.Unlock()
+
+	if result == lastRunResult+1 {
+		// 如果返回值和全局变量+1相等，则不再运行
+		fmt.Println("已通知，不再重复")
+		return
+	}
+
+	// 更新全局变量并继续运行
+	lastRunResult = result
+	fmt.Println("更新全局变量为：", lastRunResult)
+
 	numberArrays := readConfig()
 	hookUrl := numberArrays[0][0]
-	fmt.Println(hookUrl)
+
 	var hitPrizeArray []string
 	var userSelectString string
 	for _, userSelect := range numberArrays[1:] {
@@ -254,6 +281,8 @@ func run() {
 }
 
 func main() {
+	// 启动则运行一次，给全局变量赋值
+	run()
 	// 创建一个cron调度器
 	c := cron.New()
 
@@ -267,11 +296,6 @@ func main() {
 	// 启动定时任务
 	c.Start()
 
-	// 运行一段时间，让定时任务执行
-	// 这里可以根据你的实际需求设置运行时间
-	// 这里只是一个示例，你可能需要让程序一直运行或者使用其他方法来阻止程序退出
-	for {
-		run()
-		time.Sleep(1 * time.Minute)
-	}
+	// 定时任务持续执行
+	select {}
 }
