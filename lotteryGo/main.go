@@ -287,7 +287,7 @@ func main() {
 	c := cron.New()
 
 	// 添加定时任务
-	_, err := c.AddFunc("0 */1 20-23 * 1,3,6", run)
+	_, err := c.AddFunc("*/1 20-23 * * 1,3,6", run)
 	if err != nil {
 		fmt.Println("添加定时任务失败：", err)
 		return
