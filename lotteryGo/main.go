@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 )
 
 var (
@@ -254,9 +255,10 @@ func run() {
 	resultMutex.Lock()
 	defer resultMutex.Unlock()
 
-	if result == lastRunResult+1 {
+	if result <= lastRunResult {
 		// 如果返回值和全局变量+1相等，则不再运行
-		fmt.Println("已通知，不再重复")
+		currentTime := time.Now()
+		fmt.Println("已通知，不再重复:", currentTime.Format("2006-01-02 15:04:05"))
 		return
 	}
 
@@ -287,7 +289,7 @@ func main() {
 	c := cron.New()
 
 	// 添加定时任务
-	_, err := c.AddFunc("*/1 20-23 * * 1,3,6", run)
+	_, err := c.AddFunc("*/1 9-10 * * 1,3,6", run)
 	if err != nil {
 		fmt.Println("添加定时任务失败：", err)
 		return
