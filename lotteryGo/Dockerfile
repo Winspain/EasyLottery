@@ -1,6 +1,8 @@
 # 使用官方 Golang 镜像作为基础镜像
 FROM golang:latest
 
+RUN ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo Asia/Shanghai > /etc/timezone
+
 # 将当前目录的文件复制到容器的 /app 目录下
 COPY . /app
 
