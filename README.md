@@ -1,20 +1,17 @@
 # EasyLottery
 
-> 🚀定期通知大乐透中奖情况🚀使用golang重构中🚀
+> 🚀定期通知大乐透中奖情况🚀开箱即用🚀
 
 ![img.png](img.png)
 ## Feature
 
 1.
-    - [x] 录入自选号码
+    - [x] 自由录入自选号码
 2.
     - [x] 定期通知消息到钉钉机器人
 3.
-    - [x] docker部署
-4.
-    - [x] 镜像上传至dockerhub,提供部署说明
-5.
-    - [x] 使用golang重构，减少资源消耗
+    - [x] docker一键启动，开箱即用
+
 
 
 ## Usage
