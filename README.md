@@ -16,17 +16,17 @@
 5.
     - [x] 使用golang重构，减少资源消耗
 
-## Install
-
-```
-docker pull winspain0/easy_lottery:latest
-```
 
 ## Usage
+config.ini文件中：
+- 第一行填入钉钉机器人webhook
+- 每个自选号占一行
 
 ```shell
-docker run -v /root/lotteryGo/config.ini:/app/lotteryGo/config.ini -itd winspain0/easy_lottery:v2.0.0
+docker pull winspain0/easy_lottery:latest
+docker run -v /root/lotteryGo/config.ini:/app/lotteryGo/config.ini -itd winspain0/easy_lottery:latest
 ```
+
 
 ## Contributing
 
