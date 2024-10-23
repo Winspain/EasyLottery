@@ -106,8 +106,17 @@ func isEqual(arr1, arr2 []int) bool {
 
 func getLatestNumberBy500() (map[string]string, error) {
 	url := "http://datachart.500.com/dlt/history/history.shtml"
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return nil, err
+	}
 
-	response, err := http.Get(url)
+	// 设置User-Agent
+	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
+
+	// 发送HTTP请求
+	client := &http.Client{}
+	response, err := client.Do(req)
 	if err != nil {
 		return nil, err
 	}
